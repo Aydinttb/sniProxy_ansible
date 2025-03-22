@@ -18,5 +18,4 @@ ansible-galaxy collection install community.general ansible.posix community.dock
 
 ansible-playbook site.yaml --tags dnsmasq
 ```
-thanks @Gharib110 for dnsmasq proxy config and @AhmadRafiee for bootsraping playbook
-"https://github.com/AhmadRafiee"
+thanks @Gharib110 [Gharib110](https://github.com/Gharib110/) for dnsmasq proxy config and [AhmadRafiee](https://github.com/AhmadRafiee) for bootsraping playbook
