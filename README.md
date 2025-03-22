@@ -12,6 +12,10 @@ ansible-galaxy collection install community.general ansible.posix community.dock
 ```
 ## read and edit inventory file and group_vars
 
+## run playbook
+```
+ansible-playbook site.yaml
+```
 ## add or delete a domain from dns server 
 ```
 # all dnsmasq files are roles/dnsmasq/files/ and roles/dnsmasq/templates/ directory you can add address=/.jenkins.org/172.30.200.25 for wildcard jenkins.org domain or address=/jenkins.org/172.30.200.25 for just jenkins.org in roles/dnsmasq/templates/proxy.conf.j2 file then execute this command
