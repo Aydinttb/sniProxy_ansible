@@ -1,0 +1,23 @@
+---
+- name: Add the br_netfilter module
+  community.general.modprobe:
+    name: br_netfilter
+    state: present
+
+- name: Change various sysctl-settings
+  sysctl:
+    name: "{{ item.key }}"
+    state: present
+    value: "{{ item.value }}"
+    sysctl_file: /etc/sysctl.d/xaasadmin.conf
+    reload: yes
+    ignoreerrors: yes
+  with_dict: '{{ sysctl_config }}'
+
+- name: recommend tuned profile 
+  command: tuned-adm recommend
+  register: get_profile
+
+- name: start the recommended tuned profile and network-latency
+  shell: tuned-adm profile "{{ get_profile.stdout }}"  network-latency
+

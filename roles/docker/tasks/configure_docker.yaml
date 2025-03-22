@@ -1,0 +1,16 @@
+---
+- name: docker | Manual - create directories
+  file:
+    dest=/etc/systemd/system/docker.service.d/
+    recurse=yes
+    state=directory
+    owner=root
+    group=root
+
+- name: Make docker configuration file.
+  template:
+    src: docker-service.j2
+    dest: /etc/systemd/system/docker.service.d/override.conf
+  notify: 
+    - restart docker
+    - daemon-reload

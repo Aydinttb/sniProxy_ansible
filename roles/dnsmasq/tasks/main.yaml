@@ -1,0 +1,59 @@
+---
+- name: Creates directory
+  file:
+    path: "{{ service_dir }}"
+    state: directory
+
+- name: Copy compose file 
+  copy:
+    src: compose.yaml
+    dest: "{{ service_dir }}/compose.yaml"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: 
+    - compose-up
+
+- name: Copy dnsmasq.conf file 
+  copy:
+    src: dnsmasq.conf
+    dest: "{{ service_dir }}/dnsmasq.conf"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: 
+    - compose-up
+
+- name: Copy Dockerfile file 
+  copy:
+    src: Dockerfile
+    dest: "{{ service_dir }}/Dockerfile"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: 
+    - build_img
+
+- name: Copy hosts file 
+  copy:
+    src: hosts
+    dest: "{{ service_dir }}/hosts"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: 
+    - compose-up
+
+- name: Copy proxy.conf file 
+  template:
+    src: proxy.conf.j2
+    dest: "{{ service_dir }}/proxy.conf"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: 
+    - compose-up
+
+- name: deploy docker compose 
+  community.docker.docker_compose_v2:
+    project_src: "{{ service_dir }}"

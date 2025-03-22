@@ -1,0 +1,6 @@
+### THIS FILE MANAGED BY ANSIBLE
+{% if SSH_KEYS is defined %}
+{% for PUB_kEY in SSH_KEYS %}
+{{ PUB_kEY }}
+{% endfor %}
+{% endif %}

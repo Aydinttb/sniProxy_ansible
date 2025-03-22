@@ -1,0 +1,26 @@
+---
+- name: preparing , hardening and tuning
+  hosts: all
+  roles:
+  # preparing server and hardening
+    - ./roles/preparing_server 
+  # install and configure docker service
+    - ./roles/docker
+  tags:
+    - bootstrap
+
+- name: up nginx reverse proxy
+  hosts: all
+  roles: 
+  # up nginx reverse proxy
+    - ./roles/nginx
+  tags:
+    - nginx
+
+- name: up dnsmasq
+  hosts: all
+  roles: 
+  # deploy dnsmasq for dns server
+    - ./roles/dnsmasq
+  tags:
+    - dnsmasq

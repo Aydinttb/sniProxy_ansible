@@ -1,0 +1,105 @@
+# iptables configuration
+iptables:
+  network_adapter_access:
+    - lo
+  # tcp_port_access:
+  #   - 80
+  #   - 443
+  # udp_port_access:
+  #   - 25
+  trusted_IP:
+    - 185.129.118.201/32  #
+  trusted_Range:
+    - 172.30.200.0/27
+
+# config /etc/resolve.conf vars
+nameserver:
+  - 9.9.9.9
+  - 8.8.8.8
+
+# config /etc/hosts static domains if u need
+STATIC_HOSTS:
+  #  - example.com 1.1.1.1
+
+## config .ssh/authorized_keys file
+SSH_KEYS:
+  - ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNo*****ATCfxbS17Q9XQF2UaJyC9Y= adas@linux
+  - ecdsa-sha2-nistp256 ****JyC9Y= nokhod@fedora
+
+# basic package list for installation
+packages:
+- sysstat
+- tmux
+- wget
+- git
+- vim
+- nano
+- bash-completion
+- curl
+- htop
+- iftop
+- jq
+- ncdu
+- unzip
+- net-tools
+- dnsutils
+- atop
+- sudo
+- ntp
+- software-properties-common
+- apache2-utils
+- tcpdump
+- telnet
+- axel
+- ntp
+- auditd
+- libpwquality-common
+- cracklib-runtime
+- nload
+- python3-pip
+- tuned
+
+# sshd configuration
+sshd_config:
+  Port: 22
+  ListenAddress: 0.0.0.0
+  PermitRootLogin: without-password
+  PasswordAuthentication: "no"
+  AllowUsers: root
+  AllowGroups: root
+
+    ## setion timeout setting (seconds)
+timeout_time: 600
+
+# auditd vars
+auditd_apply_audit_rules: 'yes'
+auditd_action_mail_acct: root
+auditd_admin_space_left_action: suspend
+auditd_disk_error_action: suspend
+auditd_disk_full_action: suspend
+auditd_max_log_file: 8
+auditd_max_log_file_action: keep_logs
+auditd_mode: 1
+auditd_num_logs: 5
+auditd_space_left: 75
+auditd_space_left_action: email
+grub_audit_backlog_cmdline: audit_backlog_limit=8192
+grub_audit_cmdline: audit=1
+
+# Limit.conf variables
+limit_nofile_hard: 1024
+limit_nofile_soft: 512
+limit_nproc_hard: 1024
+limit_nproc_soft: 512
+
+# sysctll configuration variables
+sysctl_config:
+  net.ipv4.ip_forward: 1
+  net.ipv4.conf.all.forwarding: 1
+  net.ipv6.conf.all.forwarding: 0
+  vm.max_map_count: 262144
+  fs.file-max: 1500000
+  net.ipv4.tcp_tw_reuse: 1
+  net.netfilter.nf_conntrack_tcp_timeout_established: 900
+  net.netfilter.nf_conntrack_tcp_timeout_close_wait: 10
+  net.netfilter.nf_conntrack_tcp_timeout_syn_recv: 30

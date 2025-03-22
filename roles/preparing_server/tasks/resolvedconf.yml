@@ -1,0 +1,16 @@
+---
+- name: Stop and disable systemd-resolved.service
+  service:
+    name: systemd-resolved.service
+    state: stopped
+    enabled: no
+
+- name: resolv.conf
+  become: 'yes'
+  template:
+    src: resolv.conf.j2
+    dest: /etc/resolv.conf
+    backup: 'yes'
+    mode: 0644
+    owner: root
+    group: root

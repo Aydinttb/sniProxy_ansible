@@ -1,0 +1,12 @@
+version: '3'
+services:
+  dnsmasq:
+    build: dnsmasq/.
+    image: dnsmasq
+    network_mode: host
+    container_name: dnsmasq-proxy
+    restart: always
+    volumes:
+      - ./dnsmasq.conf:/etc/dnsmasq.conf
+      - ./proxy.conf:/etc/dnsmasq.d/proxy.conf
+      - ./hosts:/etc/hosts

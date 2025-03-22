@@ -1,0 +1,34 @@
+---
+- name: Creates directory
+  file:
+    path: "{{ service_dir }}"
+    state: directory
+
+- name: Copy compose file 
+  copy:
+    src: compose.yml
+    dest: "{{ service_dir }}/compose.yml"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: 
+    - compose-up
+
+- name: Copy nginx.conf file 
+  copy:
+    src: nginx.conf
+    dest: "{{ service_dir }}/nginx.conf"
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+  notify: 
+    - compose-up
+
+- name: pull images 
+  community.docker.docker_compose_v2_pull:
+    project_src: "{{ service_dir }}"
+
+- name: deploy docker compose 
+  community.docker.docker_compose_v2:
+    project_src: "{{ service_dir }}"

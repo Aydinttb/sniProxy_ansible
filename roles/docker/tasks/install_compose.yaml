@@ -1,0 +1,12 @@
+---
+- name: "apt-get update"
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: install docker-compose-plugin 
+  apt:
+    name: docker-compose-plugin
+    state: latest
+    update_cache: yes
+  tags: inatall_compose

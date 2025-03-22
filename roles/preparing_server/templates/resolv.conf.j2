@@ -1,0 +1,7 @@
+### Ansible managed file
+{% if nameserver is defined %}
+{% for HOSTS in nameserver %}
+nameserver {{ HOSTS }}
+{% endfor %}
+{% endif %}
+

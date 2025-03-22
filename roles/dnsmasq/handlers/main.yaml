@@ -1,0 +1,12 @@
+---
+- name: compose-up
+  community.docker.docker_compose_v2:
+    project_src: "{{ service_dir }}"
+    state: restarted
+  register: output
+
+- name: build_img
+  community.docker.docker_image_build:
+    name: dnsmasq
+    path: "{{ service_dir }}"
+    dockerfile: Dockerfile
