@@ -22,4 +22,4 @@ ansible-playbook site.yaml
 
 ansible-playbook site.yaml --tags dnsmasq
 ```
-thanks [Gharib110](https://github.com/Gharib110/) for dnsmasq proxy config and [AhmadRafiee](https://github.com/AhmadRafiee) for bootsraping playbook
+thanks [Gharib110](https://github.com/Gharib110/) for dnsmasq proxy config and [AhmadRafiee](https://github.com/AhmadRafiee) for bootstrapping playbook
